@@ -7,9 +7,20 @@ public class Pool : MonoBehaviour
 
     private static Pool _instance;
 
-    private static IEnumerable<GameObject> Items => _instance._poolConfig.Prefabs;
+    private static IEnumerable<GameObject> Items => Instance._poolConfig.Prefabs;
 
     private static readonly List<Component> PooledObjects = new();
+
+    private static Pool Instance
+    {
+        get
+        {
+            if (_instance == null)
+                _instance = FindObjectOfType<Pool>();
+
+            return _instance;
+        }
+    }
 
     private void Awake()
     {
